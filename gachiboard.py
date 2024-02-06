@@ -127,23 +127,23 @@ class SoundboardApp(QWidget):
         start_dir = os.path.abspath(start_dir)
 
         for root, dirs, files in os.walk(start_dir):
-            mp3_files = []
+            sound_files = []
             # TODO set a default one?
             background_img = None
             for file in files:
-                if file.endswith('.mp3'):
+                if file.endswith(('.wav', '.mp3')):
                     full_path = os.path.join(root, file)
                     filename = os.path.basename(full_path)
                     #mp3_files.append(filename)
-                    mp3_files.append(full_path)
+                    sound_files.append(full_path)
                 elif file.lower() == 'background.jpg':
                     background_img = os.path.join(root, file)
 
 
-            if mp3_files or background_img:
+            if sound_files or background_img:
                 # Get a relative path for the folder name from the start_dir
                 relative_folder_path = os.path.relpath(root, start_dir)
-                folder_data[relative_folder_path] = {'sounds': mp3_files, 'background': background_img}
+                folder_data[relative_folder_path] = {'sounds': sound_files, 'background': background_img}
 
         return folder_data
 
